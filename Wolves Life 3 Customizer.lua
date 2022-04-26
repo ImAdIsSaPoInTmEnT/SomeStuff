@@ -91,13 +91,12 @@ function Customizer:SetSecondaryColor(r, g, b)
 end
 
 function Customizer:SetMaterial(material)
-    local objects = {
-        unpack(CustomizationSettings.PrimaryObjects),
-        unpack(CustomizationSettings.SecondaryObjects),
-        unpack(CustomizationSettings.MaterialObjects)
-    }
-    print(#objects)
-    print(#CustomizationSettings.PrimaryObjects + #CustomizationSettings.SecondaryObjects + #CustomizationSettings.MaterialObjects)
+    local objects = {}
+    for _, table in ipairs({CustomizationSettings.PrimaryObjects, CustomizationSettings.SecondaryObjects, CustomizationSettings.MaterialObjects}) do
+        for _, object in ipairs(table) do
+            table.insert(objects, object)
+        end
+    end
 
     if material ~= nil then
         if table.find(CustomizationSettings.Materials, material) then
