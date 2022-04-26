@@ -91,16 +91,20 @@ function Customizer:SetSecondaryColor(r, g, b)
 end
 
 function Customizer:SetMaterial(material)
+    local objects = {
+        unpack(CustomizationSettings.PrimaryObjects),
+        unpack(CustomizationSettings.SecondaryObjects),
+        unpack(CustomizationSettings.MaterialObjects)
+    }
+    print(#objects)
+    print(#CustomizationSettings.PrimaryObjects + #CustomizationSettings.SecondaryObjects + #CustomizationSettings.MaterialObjects)
+
     if material ~= nil then
         if table.find(CustomizationSettings.Materials, material) then
             game.ReplicatedStorage.MasterKey:FireServer(
                 'Material',
                 material,
-                {
-                    unpack(Customization.PrimaryObjects),
-                    unpack(Customization.SecondaryObjects),
-                    unpack(Customization.MaterialObjects)
-                }
+                objects
             )
 
             return 'success'
