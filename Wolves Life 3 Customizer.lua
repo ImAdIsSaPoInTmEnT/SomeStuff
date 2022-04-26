@@ -96,7 +96,11 @@ function Customizer:SetMaterial(material)
             game.ReplicatedStorage.MasterKey:FireServer(
                 'Material',
                 material,
-                CustomizationSettings.MaterialObjects
+                {
+                    unpack(Customization.PrimaryObjects),
+                    unpack(Customization.SecondaryObjects),
+                    unpack(Customization.MaterialObjects)
+                }
             )
 
             return 'success'
