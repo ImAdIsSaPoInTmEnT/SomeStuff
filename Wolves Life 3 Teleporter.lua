@@ -54,22 +54,18 @@ local TeleportationSettings = {
 }
 
 function Teleportation:Player(username)
-    print(1)
     if username ~= nil then
-        print(2)
         username = username:lower()
 
         local target = nil
 
         for _, player in ipairs(game.Players:GetPlayers()) do
             if (username == player.Name:lower():sub(1, #username)) then
-                print(3)
                 target = player.Name
             end
         end
 
         if target ~= nil then
-            print(4)
             if workspace:FindFirstChild(target) then
                 if workspace[target]:IsA('Model') and workspace[target].PrimaryPart ~= nil then
                     game.Players.LocalPlayer.Character.PrimaryPart.CFrame = CFrame.new(
