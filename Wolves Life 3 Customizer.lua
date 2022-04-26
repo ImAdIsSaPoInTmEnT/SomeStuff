@@ -122,7 +122,7 @@ end
 
 function Customizer:ToggleGamepassAccessory(accessoryName, toggle)
 	if accessoryName ~= nil then
-		if table.find(CustomizationSettings.GamepassAccessoryNames) then
+		if table.find(CustomizationSettings.GamepassAccessoryNames, accessoryName) then
 			if not toggle then
 				game.ReplicatedStorage.MasterKey:FireServer(
 					accessoryName,
