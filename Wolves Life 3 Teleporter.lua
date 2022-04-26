@@ -1,7 +1,7 @@
 local Teleportation = {}
 
 local TeleportationSettings = {
-    Biomes = {'Jail', 'Store', 'Camp', 'Resturant', 'Medic Centre', 'Ice Bath', 'Volcano', 'Ice Lake', 'Adoption', 'Redwood Biome', 'Snow Biome', 'Forest Biome', 'Beach Biome', 'School', 'Cafe'},
+    Biomes = {'Jail', 'Store', 'Camp', 'Restaurant', 'Medic Centre', 'Ice Bath', 'Volcano', 'Ice Lake', 'Adoption', 'Redwood Biome', 'Snow Biome', 'Forest Biome', 'Beach Biome', 'School', 'Caf\195\169'},
     Dens = {},
     Shops = {
         Forest = Vector3.new(894.7352294921875, 41.269989013671875, 181.97915649414062),
