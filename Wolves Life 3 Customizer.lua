@@ -91,7 +91,7 @@ function Customizer:SetSecondaryColor(r, g, b)
 end
 
 function Customizer:SetMaterial(material, section)
-    if material ~=n il then
+    if material ~= nil then
         if table.find(CustomizationSettings.Materials, material) then
             if section == 'all' then
                 game.ReplicatedStorage.MasterKey:FireServer(
