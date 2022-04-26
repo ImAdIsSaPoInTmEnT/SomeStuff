@@ -12,7 +12,7 @@ local CustomizationSettings = {
     },
     PrimaryObjects = {"DragonPrimary", "OceanPrimary", "BackFluff", "TailFluff", "LeftWingStart", "LeftWing2", "LeftWing3", "RightWingStart", "RightWing2", "RightWing3", "EyeLid", "Torso", "Tail1", "Tail2", "Tail3", "Tail5", "Tail6", "RightThigh", "RightEar", "EyeLid", "Head", "Hip", "LeftEar", "LeftThigh", "Muzzle", "Neck", "NeckReal"},
     SecondaryObjects = {"DragonSecondary", "OceanSecondary", "ChubbyCheeks", "Fat", "EarFluff", "JawFluff", "ChestFluff", "LegFluff", "Eyebrow1", "Eyebrow2", "Secondary", "Jaw", "RightShoulder", "RightLowerLeg", "RightLowerArm", "RightLeg", "RightFootPaw", "LeftArm", "LeftArmPaw", "LeftCarpal", "LeftFootPaw", "LeftLeg", "LeftLowerArm", "LeftLowerLeg", "LeftShoulder", "RightArm", "RightArmPaw", "RightCarpal"},
-    MaterialObjects = {"BackFluff", "TailFluff", "LeftWingStart", "LeftWing2", "LeftWing3", "RightWingStart", "RightWing2", "RightWing3", "EyeLid", "Torso", "Tail1", "Tail2", "Tail3", "Tail5", "Tail6", "RightThigh", "RightEar", "EyeLid", "Head", "Hip", "LeftEar", "LeftThigh", "Muzzle", "Neck", "NeckReal"},
+    AllObjects = {"DragonPrimary", "OceanPrimary", "BackFluff", "TailFluff", "LeftWingStart", "LeftWing2", "LeftWing3", "RightWingStart", "RightWing2", "RightWing3", "EyeLid", "Torso", "Tail1", "Tail2", "Tail3", "Tail5", "Tail6", "RightThigh", "RightEar", "EyeLid", "Head", "Hip", "LeftEar", "LeftThigh", "Muzzle", "Neck", "NeckReal", "DragonSecondary", "OceanSecondary", "ChubbyCheeks", "Fat", "EarFluff", "JawFluff", "ChestFluff", "LegFluff", "Eyebrow1", "Eyebrow2", "Secondary", "Jaw", "RightShoulder", "RightLowerLeg", "RightLowerArm", "RightLeg", "RightFootPaw", "LeftArm", "LeftArmPaw", "LeftCarpal", "LeftFootPaw", "LeftLeg", "LeftLowerArm", "LeftLowerLeg", "LeftShoulder", "RightArm", "RightArmPaw", "RightCarpal", "InsideEars", "Nose", "Pads", "Claws", "DragonClaws", "DragonThird", "Pupils", "Back", "lash"},
     Materials = {'Plastic', 'Wood', 'Slate', 'Concrete', 'CorrodedMetal', 'Foil', 'Grass', 'Ice', 'Marble', 'Granite', 'Brick', 'Pebble', 'Sand', 'Fabric', 'SmoothPlastic', 'Metal', 'WoodPlanks', 'Cobblestone', 'Neon', 'Glass', 'ForceField'}
 }
 
@@ -90,18 +90,34 @@ function Customizer:SetSecondaryColor(r, g, b)
     return 'failed'
 end
 
-function Customizer:SetMaterial(material)
-    local objects = {"DragonPrimary", "OceanPrimary", "BackFluff", "TailFluff", "LeftWingStart", "LeftWing2", "LeftWing3", "RightWingStart", "RightWing2", "RightWing3", "EyeLid", "Torso", "Tail1", "Tail2", "Tail3", "Tail5", "Tail6", "RightThigh", "RightEar", "EyeLid", "Head", "Hip", "LeftEar", "LeftThigh", "Muzzle", "Neck", "NeckReal", "DragonSecondary", "OceanSecondary", "ChubbyCheeks", "Fat", "EarFluff", "JawFluff", "ChestFluff", "LegFluff", "Eyebrow1", "Eyebrow2", "Secondary", "Jaw", "RightShoulder", "RightLowerLeg", "RightLowerArm", "RightLeg", "RightFootPaw", "LeftArm", "LeftArmPaw", "LeftCarpal", "LeftFootPaw", "LeftLeg", "LeftLowerArm", "LeftLowerLeg", "LeftShoulder", "RightArm", "RightArmPaw", "RightCarpal", "InsideEars", "Nose", "Pads", "Claws", "DragonClaws", "DragonThird", "Pupils", "Back", "lash"}
-
-    if material ~= nil then
+function Customizer:SetMaterial(material, section)
+    if material ~=n il then
         if table.find(CustomizationSettings.Materials, material) then
-            game.ReplicatedStorage.MasterKey:FireServer(
-                'Material',
-                material,
-                objects
-            )
+            if section == 'all' then
+                game.ReplicatedStorage.MasterKey:FireServer(
+                    'Material',
+                    material,
+                    CustomizationSettings.AllObjects
+                )
 
-            return 'success'
+                return 'success'
+            elseif section == 'primary' then
+                game.ReplicatedStorage.MasterKey:FireServer(
+                    'Material',
+                    material,
+                    CustomizationSettings.PrimaryObjects
+                )
+
+                return 'success'
+            elseif section == 'secondary' then
+                game.ReplicatedStorage.MasterKey:FireServer(
+                    'Material',
+                    material,
+                    CustomizationSettings.SecondaryObjects
+                )
+
+                return 'success'
+            end
         end
     end
 
