@@ -53,6 +53,34 @@ local TeleportationSettings = {
     }
 }
 
+function Teleportation:Player(username)
+    if username ~= nil then
+        username = username:lower()
+
+        local target = nil
+
+        for _, player in ipairs(game.Players:GetPlayers()) do
+            if (username == player.Name:lower():sub(1, #username)) then
+                target = player
+            end
+        end
+
+        if target ~= nil then
+            if workspace:FindFirstChild(target) then
+                if workspace[target]:IsA('Model') and workspace[target].PrimaryPart ~= nil then
+                    game.Players.LocalPlayer.Character.PrimaryPart.CFrame = CFrame.new(
+                        workspace[target].PrimaryPart.Position
+                    )
+
+                    return 'success'
+                end
+            end
+        end
+    end
+
+    return 'failed'
+end
+
 function Teleportation:Spawn(biome)
     if biome ~= nil then
         if table.find(TeleportationSettings.Biomes, biome) then
