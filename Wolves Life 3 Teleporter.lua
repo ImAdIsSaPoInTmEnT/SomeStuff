@@ -53,15 +53,21 @@ local TeleportationSettings = {
     }
 }
 
-function Teleportation:Player(username)
-    if username ~= nil then
+function Teleportation:Player(username, displayName)
+    if username ~= nil and displayName ~= nil then
         username = username:lower()
 
         local target = nil
 
         for _, player in ipairs(game.Players:GetPlayers()) do
-            if (username == player.Name:lower():sub(1, #username)) then
-                target = player.Name
+            if displayName then
+                if (username == player.DisplayName:lower():sub(1, #username)) then
+                    target = player.Name
+                end
+            else
+                if (username == player.Name:lower():sub(1, #username)) then
+                    target = player.Name
+                end
             end
         end
 
