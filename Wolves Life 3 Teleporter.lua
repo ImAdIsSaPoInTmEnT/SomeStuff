@@ -17,7 +17,9 @@ local TeleportationSettings = {
 
 function Teleportation:Spawn(biome)
     if biome ~= nil then
+        print(1)
         if table.find(TeleportationSettings.Biomes, biome) then
+            print(2)
             game.ReplicatedStorage.MasterKey:FireServer(
                 'Spawn',
                 biome
