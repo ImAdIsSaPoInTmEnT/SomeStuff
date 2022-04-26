@@ -92,8 +92,13 @@ end
 
 function Customizer:SetMaterial(material)
     local objects = {}
-    for _, table in ipairs({CustomizationSettings.PrimaryObjects, CustomizationSettings.SecondaryObjects, CustomizationSettings.MaterialObjects}) do
-        for _, object in ipairs(table) do
+    
+    local player = game.Players.LocalPlayer
+    local character = player.Character
+    if character == nil then return end
+
+    for _, object in pairs(character:GetDescendants()) do
+        if object:IsA('BasePart') then
             table.insert(objects, object)
         end
     end
