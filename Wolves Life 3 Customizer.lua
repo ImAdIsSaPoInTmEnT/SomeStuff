@@ -6,9 +6,9 @@ local CustomizationSettings = {
 	Keys = {
 		GamepassAccessories = '\230\139\154\230\136\172i\235\156\146(\238\138\155\201\172XD'
 	},
-	PrimaryObjects = {"DragonPrimary", "OceanPrimary", "BackFluff", "TailFluff", "LeftWingStart", "LeftWing2", "LeftWing3", "RightWingStart", "RightWing2", "RightWing3", "EyeLid", "Torso", "Tail1", "Tail2", "Tail3", "Tail5", "Tail6", "RightThigh", "RightEar", "EyeLid", "Head", "Hip", "LeftEar", "LeftThigh", "Muzzle", "Neck", "NeckReal"},
-	SecondaryObjects = {"DragonSecondary", "OceanSecondary", "ChubbyCheeks", "Fat", "EarFluff", "JawFluff", "ChestFluff", "LegFluff", "Eyebrow1", "Eyebrow2", "Secondary", "Jaw", "RightShoulder", "RightLowerLeg", "RightLowerArm", "RightLeg", "RightFootPaw", "LeftArm", "LeftArmPaw", "LeftCarpal", "LeftFootPaw", "LeftLeg", "LeftLowerArm", "LeftLowerLeg", "LeftShoulder", "RightArm", "RightArmPaw", "RightCarpal"},
-	AllObjects = {"DragonPrimary", "OceanPrimary", "BackFluff", "TailFluff", "LeftWingStart", "LeftWing2", "LeftWing3", "RightWingStart", "RightWing2", "RightWing3", "EyeLid", "Torso", "Tail1", "Tail2", "Tail3", "Tail5", "Tail6", "RightThigh", "RightEar", "EyeLid", "Head", "Hip", "LeftEar", "LeftThigh", "Muzzle", "Neck", "NeckReal", "DragonSecondary", "OceanSecondary", "ChubbyCheeks", "Fat", "EarFluff", "JawFluff", "ChestFluff", "LegFluff", "Eyebrow1", "Eyebrow2", "Secondary", "Jaw", "RightShoulder", "RightLowerLeg", "RightLowerArm", "RightLeg", "RightFootPaw", "LeftArm", "LeftArmPaw", "LeftCarpal", "LeftFootPaw", "LeftLeg", "LeftLowerArm", "LeftLowerLeg", "LeftShoulder", "RightArm", "RightArmPaw", "RightCarpal", "InsideEars", "Nose", "Pads", "Claws", "DragonClaws", "DragonThird", "Pupils", "Back", "lash"},
+	PrimaryObjects = {'DragonPrimary', 'OceanPrimary', 'BackFluff', 'TailFluff', 'LeftWingStart', 'LeftWing2', 'LeftWing3', 'RightWingStart', 'RightWing2', 'RightWing3', 'EyeLid', 'Torso', 'Tail1', 'Tail2', 'Tail3', 'Tail5', 'Tail6', 'RightThigh', 'RightEar', 'EyeLid', 'Head', 'Hip', 'LeftEar', 'LeftThigh', 'Muzzle', 'Neck', 'NeckReal'},
+	SecondaryObjects = {'DragonSecondary', 'OceanSecondary', 'ChubbyCheeks', 'Fat', 'EarFluff', 'JawFluff', 'ChestFluff', 'LegFluff', 'Eyebrow1', 'Eyebrow2', 'Secondary', 'Jaw', 'RightShoulder', 'RightLowerLeg', 'RightLowerArm', 'RightLeg', 'RightFootPaw', 'LeftArm', 'LeftArmPaw', 'LeftCarpal', 'LeftFootPaw', 'LeftLeg', 'LeftLowerArm', 'LeftLowerLeg', 'LeftShoulder', 'RightArm', 'RightArmPaw', 'RightCarpal'},
+	AllObjects = {'DragonPrimary', 'OceanPrimary', 'BackFluff', 'TailFluff', 'LeftWingStart', 'LeftWing2', 'LeftWing3', 'RightWingStart', 'RightWing2', 'RightWing3', 'EyeLid', 'Torso', 'Tail1', 'Tail2', 'Tail3', 'Tail5', 'Tail6', 'RightThigh', 'RightEar', 'EyeLid', 'Head', 'Hip', 'LeftEar', 'LeftThigh', 'Muzzle', 'Neck', 'NeckReal', 'DragonSecondary', 'OceanSecondary', 'ChubbyCheeks', 'Fat', 'EarFluff', 'JawFluff', 'ChestFluff', 'LegFluff', 'Eyebrow1', 'Eyebrow2', 'Secondary', 'Jaw', 'RightShoulder', 'RightLowerLeg', 'RightLowerArm', 'RightLeg', 'RightFootPaw', 'LeftArm', 'LeftArmPaw', 'LeftCarpal', 'LeftFootPaw', 'LeftLeg', 'LeftLowerArm', 'LeftLowerLeg', 'LeftShoulder', 'RightArm', 'RightArmPaw', 'RightCarpal', 'InsideEars', 'Nose', 'Pads', 'Claws', 'DragonClaws', 'DragonThird', 'Pupils', 'Back', 'lash'},
 	Materials = {'Plastic', 'Wood', 'Slate', 'Concrete', 'CorrodedMetal', 'Foil', 'Grass', 'Ice', 'Marble', 'Granite', 'Brick', 'Pebble', 'Sand', 'Fabric', 'SmoothPlastic', 'Metal', 'WoodPlanks', 'Cobblestone', 'Neon', 'Glass', 'ForceField'}
 }
 
@@ -72,6 +72,30 @@ function Customizer:SetSecondaryColor(r, g, b)
 		game.ReplicatedStorage.MasterKey:FireServer(
 			'customize',
 			CustomizationSettings.SecondaryObjects,
+			Color3.fromRGB(
+				r,
+				g,
+				b
+			),
+			'Body'
+		)
+
+		return 'success'
+	end
+
+	return 'failed'
+end
+
+function Customizer:SetFullBodyColor(r, g, b)
+    local _, e = pcall(function()
+		r = tonumber(r)
+		g = tonumber(g)
+		b = tonumber(b)
+	end)
+	if not e then
+		game.ReplicatedStorage.MasterKey:FireServer(
+			'customize',
+			CustomizationSettings.AllObjects,
 			Color3.fromRGB(
 				r,
 				g,
