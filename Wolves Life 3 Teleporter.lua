@@ -94,13 +94,18 @@ function Teleportation:Bring(group, username, displayName)
                     if player.GameData:FindFirstChild('Age') then
                         if player.GameData.Age.Value ~= 'Newborn' and player.GameData.Age.Value:len() > 1 then
                             if player.Character ~= nil and player.Character:FindFirstChildWhichIsA('Seat') then
+                                print(-5)
                                if displayName then
+                                    print(-4)
                                 if (username == player.DisplayName:lower():sub(1, #username)) then
+                                        print(-3)
                                     table.insert(players, player)
                                     break
                                    end
                                else
+                                    print(-2)
                                 if (username == player.Name:lower():sub(1, #username)) then
+                                        print(-1)
                                     table.insert(players, player)
                                     break
                                    end
