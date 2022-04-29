@@ -124,13 +124,13 @@ function Teleportation:Bring(group, username, displayName)
                             
                             local SeatWeld = seat:FindFirstChild('SeatWeld')
                             print(2)
-                            if SeatWeld == nil then continue end
+                            if SeatWeld == nil then --[[]] end
                             print(3)
 
                             SeatWeld:Destroy()
                             print(4)
                             wait(0.1)
-                            print(game.Players.LocalPlayer.Character.humanoidrootpart.Position - position).Magnitude
+                            print((game.Players.LocalPlayer.Character.humanoidRootPart.Position - position).Magnitude)
                             repeat
                                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(
                                     position
