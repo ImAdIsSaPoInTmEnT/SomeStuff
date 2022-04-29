@@ -54,107 +54,27 @@ local TeleportationSettings = {
 }
 
 function Teleportation:Bring(group, username, displayName)
-    local players = {}
-    local position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
-    local CanTP = true
-
-    for _, player in pairs(game:GetService('Players'):GetPlayers()) do
-        if player == game.Players.LocalPlayer then continue end
-
-        if group:lower() == 'all' then
-            pcall(function()
-                if player.GameData.Age.Value ~= 'Newborn' and player.GameData.Age.Value:len() > 1 then
-                    if player.Character ~= nil then
-                        if player.Character:FindFirstChildWhichIsA('Seat') then
-                            table.insert(players, player)
-                        end
-                    end
-                end
-            end)
-        end
-    end
-
-    for _, player in ipairs(players) do
-        repeat wait() until CanTP
-        print('CanTP')
-        CanTP = false
-        print('CanTP False')
-
-        spawn(function()
-            wait(0.6)
-            print('CanTP true')
-
-            repeat
-                wait()
-            until (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - position).Magnitude <= 10
-            print('Close enough for daddy..')
-
-            wait()
-            CanTP = true
-        end)
-
-        local character = nil
-        local seat = nil
-
-        pcall(function()
-            if player.Character ~= nil then
-                if player.Character:FindFirstChildOfClass('Humanoid') then
-                    if player.Character:FindFirstChildOfClass('Humanoid').Health > 0 then
-                        character = player.Character
-
-                        if character:FindFirstChildWhichIsA('Seat') then
-                            seat = character:FindFirstChildWhichIsA('Seat')
-                        end
-                    end
-                end
-            end
-        end)
-
-        pcall(function()
-            if character ~= nil and seat ~= nil then
-                local SeatWelds = {}
-    
-                for _, object in pairs(seat:GetChildren()) do
-                    if object.Name == 'SeatWeld' then
-                        table.insert(SeatWelds, object)
-                    end
-                end
-    
-                if game.Players.LocalPlayer.Character ~= nil then
-                    if game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid') then
-                        if game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').Health > 0 then
-                            local humanoid = game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid')
-
-                            seat:Sit(humanoid)
-                            print(1)
-                            
-                            local SeatWeld = seat:FindFirstChild('SeatWeld')
-                            print(2)
-                            if SeatWeld == nil then --[[]] end
-                            print(3)
-
-                            SeatWeld:Destroy()
-                            print(4)
-                            wait(0.1)
-                            print((game.Players.LocalPlayer.Character.humanoidRootPart.Position - position).Magnitude)
-                            repeat
-                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(
-                                    position
-                                )
-                            until (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - position).Magnitude <= 10
-
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(
-                                position
-                            )
-
-                            wait(0.1)
-                        end
-                    end
-                end
-            end
-        end)
-        wait(0.1)
-    end
+	if group:lower() == 'all' then
+		pcall(function()
+			local pos = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+			
+			for _, player in pairs(game.Players:GetPlayers()) do
+				if player ~= game.Players.LocalPlayer then
+					pcall(function()
+						local seat = player.Character.Seat1 or player.Character.Seat2
+						seat:Sit(game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid'))
+						wait(0.1)
+						repeat wait() until seat:FindFirstChild('SeatWeld')
+						seat.SeatWeld:Destroy()
+						wait(0.1)
+						game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(
+							pos
+						)
+					end)
+				end
+			end
+		end)
+	end
 end
 
 function Teleportation:Player(username, displayName)
