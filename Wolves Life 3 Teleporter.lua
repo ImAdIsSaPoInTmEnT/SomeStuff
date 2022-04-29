@@ -54,6 +54,7 @@ local TeleportationSettings = {
 }
 
 function Teleportation:Bring(group, username, displayName)
+    print(group, username, displayName)
     local players = {}
 
     for _, player in pairs(game.Players:GetPlayers()) do
