@@ -81,14 +81,8 @@ function Teleportation:Bring(group, username, displayName)
         print('CanTP False')
 
         spawn(function()
-            wait(0.4)
+            wait(0.6)
             print('CanTP true')
-
-            repeat
-                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(
-                    position
-                )
-            until (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - position).Magnitude <= 10
             wait()
             CanTP = true
         end)
@@ -126,12 +120,23 @@ function Teleportation:Bring(group, username, displayName)
                             local humanoid = game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid')
 
                             seat:Sit(humanoid)
+                            print(1)
                             
                             local SeatWeld = seat:FindFirstChild('SeatWeld')
-                            if SeatWeld == nil the continue end
+                            print(2)
+                            if SeatWeld == nil then continue end
+                            print(3)
 
                             SeatWeld:Destroy()
+                            print(4)
                             wait(0.1)
+                            print(game.Players.LocalPlayer.Character.humanoidrootpart.Position - position).Magnitude
+                            repeat
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(
+                                    position
+                                )
+                            until (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - position).Magnitude <= 10
+
                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(
                                 position
                             )
