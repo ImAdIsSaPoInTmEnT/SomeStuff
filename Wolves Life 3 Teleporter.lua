@@ -78,6 +78,13 @@ function Teleportation:Bring(group, username, displayName)
         repeat wait() until CanTP
         print('CanTP')
         CanTP = false
+        print('CanTP False')
+
+        spawn(function()
+            wait(0.3)
+            print('CanTP true')
+            CanTP = true
+        end)
 
         local character = nil
         local seat = nil
@@ -134,8 +141,7 @@ function Teleportation:Bring(group, username, displayName)
                 end
             end
         end)
-        wait(0.25)
-        CanTP = true
+        wait(0.1)
     end
 end
 
