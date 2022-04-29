@@ -88,7 +88,7 @@ function Teleportation:Bring(group, username, displayName)
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(
                     position
                 )
-            until (game.Players.LocalPLayer.Character.HumanoidRootPart.Position - position).Magnitude <= 10
+            until (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - position).Magnitude <= 10
             wait()
             CanTP = true
         end)
