@@ -76,6 +76,7 @@ function Teleportation:Bring(group, username, displayName)
 
     for _, player in ipairs(players) do
         repeat wait() until CanTP
+        print('CanTP')
         CanTP = false
 
         local character = nil
