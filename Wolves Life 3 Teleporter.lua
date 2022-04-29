@@ -81,7 +81,7 @@ function Teleportation:Bring(group, username, displayName)
         print('CanTP False')
 
         spawn(function()
-            wait(0.3)
+            wait(0.4)
             print('CanTP true')
             CanTP = true
         end)
@@ -131,7 +131,8 @@ function Teleportation:Bring(group, username, displayName)
                             until SeatWeld ~= nil
 
                             SeatWeld:Destroy()
-                            humanoid.Parent.HumanoidRootPart.CFrame = CFrame.new(
+                            wait(0.1)
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(
                                 position
                             )
 
