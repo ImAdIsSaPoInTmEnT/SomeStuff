@@ -118,7 +118,38 @@ function Teleportation:Bring(group, username, displayName)
 			end
         end)
     elseif group:lower() == 'player' then
+        pcall(function()
+            local pos = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
 
+            for _, player in pairs(game.Players:GetPlayers()) do
+                if player ~= game.Players.LocalPlayer then
+                    pcall(function()
+                        local IsTarget = false
+
+                        if UseDisplayName then
+                            if (username:lower() == player.DisplayName:lower():sub(1, #username)) then
+                                IsTarget = true
+                            end
+                        else
+                            if (username:lower() == player.Name:lower():sub(1, #username)) then
+                                IsTarget = true
+                            end
+                        end
+
+                        if IsTarget and player.GameData.Age.Value ~= 'Newborn' then
+                            local seat = player.Character.Seat1 or player.Character.Seat2
+                            seat:Sit(game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid'))
+                            repeat wait() until seat:FindFirstChild('SeatWeld')
+                            seat.SeatWeld:Destroy()
+                            wait(0.1)
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(
+                                pos
+                            )
+                        end
+                    end)
+                end
+            end
+        end)
 	end
 end
 
