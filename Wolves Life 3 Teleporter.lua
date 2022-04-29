@@ -112,11 +112,12 @@ function Teleportation:Bring(group, username, displayName)
             end
         end
     end
-
+    print(unpack(players))
     for _, player in pairs(players) do
         if player.Character:FindFirstChildWhichIsA('Seat') then
             local seat = player.Character:FindFirstChildWhichIsA('Seat')
             if game.Players.LocalPlayer.Character ~= nil then
+                print(1)
                 if game.Players.LocalPlayer.Character:FindFirstChild('Humanoid') then
                     if game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
                         seat:Sit(game.Players.LocalPlayer.Character.Humanoid)
