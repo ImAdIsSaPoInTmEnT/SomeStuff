@@ -60,15 +60,10 @@ function Teleportation:Bring(group, username, displayName)
     for _, player in pairs(game.Players:GetPlayers()) do
         if player ~= game.Players.LocalPlayer then
             if group:lower() == 'all' then
-                print(1)
                 if player:FindFirstChild('GameData') then
-                    print(2)
                     if player.GameData:FindFirstChild('Age') then
-                        print(3)
                         if player.GameData.Age.Value ~= 'Newborn' and player.GameData.Age.Value:len() > 1 then
-                            print(4)
                             if player.Character ~= nil and player.Character:FindFirstChildWhichIsA('Seat') then
-                                print(5)
                                 table.insert(players, player)
                             end
                         end
@@ -120,12 +115,9 @@ function Teleportation:Bring(group, username, displayName)
 
     for _, player in pairs(players) do
         if player.Character:FindFirstChildWhichIsA('Seat') then
-            print(6)
             local seat = player.Character:FindFirstChildWhichIsA('Seat')
             if game.Players.LocalPlayer.Character ~= nil then
-                print(7)
                 if game.Players.LocalPlayer.Character:FindFirstChild('Humanoid') then
-                    print(8)
                     if game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
                         seat:Sit(game.Players.LocalPlayer.Character.Humanoid)
                         repeat wait() until seat:FindFirstChild('SeatWeld')
