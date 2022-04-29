@@ -128,14 +128,13 @@ function Teleportation:Bring(group, username, displayName)
                             )
 
                             wait(0.1)
-                            
-                            CanTP = true
                         end
                     end
                 end
             end
         end)
-        wait(0.2)
+        wait(0.25)
+        CanTP = true
     end
 end
 
