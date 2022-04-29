@@ -127,7 +127,9 @@ function Teleportation:Bring(group, username, displayName)
                         local IsTarget = false
 
                         if UseDisplayName then
+                            print(1)
                             if (username:lower() == player.DisplayName:lower():sub(1, #username)) then
+                                print(2)
                                 IsTarget = true
                             end
                         else
