@@ -1,5 +1,5 @@
 local Customizer = {}
-Customizer.CurrentVersion = '1.0.1'
+Customizer.CurrentVersion = '1.1.8'
 
 local CustomizationSettings = {
 	GamepassAccessoryNames = {'Wings', 'Dragon', 'Ocean'},
