@@ -63,7 +63,6 @@ function Teleportation:Bring(group, username, displayName)
 					pcall(function()
 						local seat = player.Character.Seat1 or player.Character.Seat2
 						seat:Sit(game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid'))
-						wait(0.1)
 						repeat wait() until seat:FindFirstChild('SeatWeld')
 						seat.SeatWeld:Destroy()
 						wait(0.1)
@@ -74,6 +73,52 @@ function Teleportation:Bring(group, username, displayName)
 				end
 			end
 		end)
+
+    elseif group:lower() == 'pups' then
+        pcall(function()
+            local pos = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+			
+			for _, player in pairs(game.Players:GetPlayers()) do
+				if player ~= game.Players.LocalPlayer then
+					pcall(function()
+                        if player.GameData.Age.Value:lower() == 'pup' then
+                            local seat = player.Character.Seat1 or player.Character.Seat2
+                            seat:Sit(game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid'))
+                            repeat wait() until seat:FindFirstChild('SeatWeld')
+                            seat.SeatWeld:Destroy()
+                            wait(0.1)
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(
+                                pos
+                            )
+                        end
+					end)
+				end
+			end
+        end)
+
+    elseif group:lower() == 'adults' then
+        pcall(function()
+            local pos = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+			
+			for _, player in pairs(game.Players:GetPlayers()) do
+				if player ~= game.Players.LocalPlayer then
+					pcall(function()
+                        if player.GameData.Age.Value:lower() == 'adult' then
+                            local seat = player.Character.Seat1 or player.Character.Seat2
+                            seat:Sit(game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid'))
+                            repeat wait() until seat:FindFirstChild('SeatWeld')
+                            seat.SeatWeld:Destroy()
+                            wait(0.1)
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(
+                                pos
+                            )
+                        end
+					end)
+				end
+			end
+        end)
+    elseif group:lower() == 'player' then
+
 	end
 end
 
