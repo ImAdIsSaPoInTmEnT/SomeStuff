@@ -83,6 +83,13 @@ function Teleportation:Bring(group, username, displayName)
         spawn(function()
             wait(0.4)
             print('CanTP true')
+
+            repeat
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(
+                    position
+                )
+            until (game.Players.LocalPLayer.Character.HumanoidRootPart.Position - position).Magnitude <= 10
+            wait()
             CanTP = true
         end)
 
