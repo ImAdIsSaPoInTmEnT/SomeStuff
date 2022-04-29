@@ -122,7 +122,7 @@ function Teleportation:Bring(group, username, displayName)
                         seat:Sit(game.Players.LocalPlayer.Character.Humanoid)
                         repeat wait() until seat:FindFirstChild('SeatWeld')
                         seat.SeatWeld:Destroy()
-                        print(0)
+                        --[[print(0)
                         
                         wait(0.1)
                         print(1)
@@ -133,7 +133,7 @@ function Teleportation:Bring(group, username, displayName)
 
                         print(2)
                         wait(0.1)
-                        print(3)
+                        print(3)]]
                     end
                 end
             end
