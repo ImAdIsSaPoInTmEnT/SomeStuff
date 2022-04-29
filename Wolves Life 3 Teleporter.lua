@@ -127,15 +127,8 @@ function Teleportation:Bring(group, username, displayName)
 
                             seat:Sit(humanoid)
                             
-                            local SeatWeld = false
-                            repeat
-                                for _, object in pairs(seat:GetChildren()) do
-                                    if object.Name == 'SeatWeld' and not table.find(SeatWelds, object) then
-                                        SeatWeld = object
-                                        break
-                                    end
-                                end
-                            until SeatWeld ~= nil
+                            local SeatWeld = seat:FindFirstChild('SeatWeld')
+                            if SeatWeld == nil the continue end
 
                             SeatWeld:Destroy()
                             wait(0.1)
