@@ -1,5 +1,4 @@
 local Teleportation = {}
-Teleportation.CurrentVersion = '1.0.0'
 
 local TeleportationSettings = {
     Biomes = {'Jail', 'Store', 'Camp', 'Restaurant', 'Medic Centre', 'Ice Bath', 'Volcano', 'Ice Lake', 'Adoption', 'Redwood Biome', 'Snow Biome', 'Forest Biome', 'Beach Biome', 'School', 'Caf\195\169'},
@@ -58,83 +57,79 @@ function Teleportation:Bring(group, username, displayName)
     local players = {}
     local position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
 
-    for _, player in pairs(game.Players:GetPlayers()) do
-        if player ~= game.Players.LocalPlayer then
-            if group:lower() == 'all' then
-                if player:FindFirstChild('GameData') then
-                    if player.GameData:FindFirstChild('Age') then
-                        if player.GameData.Age.Value ~= 'Newborn' and player.GameData.Age.Value:len() > 1 then
-                            if player.Character ~= nil and player.Character:FindFirstChildWhichIsA('Seat') then
-                                table.insert(players, player)
-                            end
+    for _, player in pairs(game:GetService('Players'):GetPlayers()) do
+        if player == game.Players.LocalPlayer then continue end
+
+        if group:lower() == 'all' then
+            pcall(function()
+                if player.GameData.Age.Value ~= 'Newborn' and player.GameData.Age.Value:len() > 1 then
+                    if player.Character ~= nil then
+                        if player.Character:FindFirstChildWhichIsA('Seat') then
+                            table.insert(players, player)
                         end
                     end
                 end
-            elseif group:lower() == 'pups' then
-                if player:FindFirstChild('GameData') then
-                    if player.GameData:FindFirstChild('Age') then
-                        if player.GameData.Age.Value == 'Pup' then
-                            if player.Character ~= nil and player.Character:FindFirstChildWhichIsA('Seat') then
-                                table.insert(players, player)
-                            end
-                        end
-                    end
-                end
-            elseif group:lower() == 'adults' then
-                if player:FindFirstChild('GameData') then
-                    if player.GameData:FindFirstChild('Age') then
-                        if player.GameData.Age.Value == 'Adult' then
-                            if player.Character ~= nil and player.Character:FindFirstChildWhichIsA('Seat') then
-                                table.insert(players, player)
-                            end
-                        end
-                    end
-                end
-            elseif group:lower() == 'player' then
-                if player:FindFirstChild('GameData') then
-                    if player.GameData:FindFirstChild('Age') then
-                        if player.GameData.Age.Value ~= 'Newborn' and player.GameData.Age.Value:len() > 1 then
-                            if player.Character ~= nil and player.Character:FindFirstChildWhichIsA('Seat') then
-                                if displayName then
-                                    if (username:lower() == player.DisplayName:lower():sub(1, #username)) then
-                                        table.insert(players, player)
-                                        break
-                                    end
-                                else
-                                    if (username:lower() == player.Name:lower():sub(1, #username)) then
-                                        table.insert(players, player)
-                                        break
-                                    end
-                                end
-                            end
-                        end
-                    end
-                end
-            end
+            end)
         end
     end
 
-    for _, player in pairs(players) do
-        if player.Character:FindFirstChildWhichIsA('Seat') then
-            local seat = player.Character:FindFirstChildWhichIsA('Seat')
-            if game.Players.LocalPlayer.Character ~= nil then
-                if game.Players.LocalPlayer.Character:FindFirstChild('Humanoid') then
-                    if game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
-                        seat:Sit(game.Players.LocalPlayer.Character.Humanoid)
-                        repeat wait() until seat:FindFirstChild('SeatWeld')
-                        seat.SeatWeld:Destroy()
+    for _, player in ipairs(players) do
+        local character = nil
+        local seat = nil
 
-                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(
-                            position
-                        )
+        pcall(function()
+            if player.Character ~= nil then
+                if player.Character:FindFirstChildOfClass('Humanoid') then
+                    if player.Character:FindFirstChildOfClass('Humanoid').Health > 0 then
+                        character = player.Character
 
-                        wait(0.1)
+                        if character:FindFirstChildWhichIsA('Seat') then
+                            seat = character:FindFirstChildWhichIsA('Seat')
+                        end
                     end
                 end
             end
-        end
+        end)
 
-        wait()
+        pcall(function()
+            if character ~= nil and seat ~= nil then
+                local SeatWelds = {}
+    
+                for _, object in pairs(seat:GetChildren()) do
+                    if object.Name == 'SeatWeld' then
+                        table.insert(SeatWelds, object)
+                    end
+                end
+    
+                if game.Players.LocalPlayer.Character ~= nil then
+                    if game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid') then
+                        if game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').Health > 0 then
+                            local humanoid = game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid')
+
+                            seat:Sit(humanoid)
+                            
+                            local SeatWeld = false
+                            repeat
+                                for _, object in pairs(seat:GetChildren()) do
+                                    if object.Name == 'SeatWeld' and not table.find(SeatWelds, object) then
+                                        SeatWeld = object
+                                        break
+                                    end
+                                end
+                            until SeatWeld ~= nil
+
+                            SeatWeld:Destroy()
+                            humanoid.Parent.HumanoidRootPart.CFrame = CFrame.new(
+                                position
+                            )
+
+                            wait(0.1)
+                        end
+                    end
+                end
+            end
+        end)
+        wait(0.2)
     end
 end
 
