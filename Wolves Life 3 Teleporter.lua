@@ -53,6 +53,76 @@ local TeleportationSettings = {
     }
 }
 
+function Teleportation:Bring(group, username, displayName)
+    local players = {}
+
+    for _, player in pairs(game.Players:GetPlayers()) do
+        if player ~= game.Players.LocalPlayer then
+            if group:lower() == 'all' then
+                if player:FindFirstChild('GameData') then
+                    if player.GameData:FindFirstChild('Age') then
+                        if player.GameData.Age.Value ~= 'Newborn' and player.GameData.Age.Value:len() > 1 then
+                            if player.Character ~= nil and player.Character:FindFirstChildWhichIsA('Seat') then
+                                table.insert(players, player)
+                            end
+                        end
+                    end
+                end
+            elseif group:lower() == 'pups' then
+                if player:FindFirstChild('GameData') then
+                    if player.GameData:FindFirstChild('Age') then
+                        if player.GameData.Age.Value == 'Pup' then
+                            if player.Character ~= nil and player.Character:FindFirstChildWhichIsA('Seat') then
+                                table.insert(players, player)
+                            end
+                        end
+                    end
+                end
+            elseif group:lower() == 'adults' then
+                if player:FindFirstChild('GameData') then
+                    if player.GameData:FindFirstChild('Age') then
+                        if player.GameData.Age.Value == 'Adult' then
+                            if player.Character ~= nil and player.Character:FindFirstChildWhichIsA('Seat') then
+                                table.insert(players, player)
+                            end
+                        end
+                    end
+                end
+            elseif group:lower() == 'player' then
+                if player:FindFirstChild('GameData') then
+                    if player.GameData:FindFirstChild('Age') then
+                        if player.GameData.Age.Value ~= 'Newborn' and player.GameData.Age.Value:len() > 1 then
+                            if player.Character ~= nil and player.Character:FindFirstChildWhichIsA('Seat') then
+                               if (username == player.DisplayName:lower():sub(1, #username)) then
+                                table.insert(players, player)
+                                break
+                               end
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+
+    for _, player in pairs(players) do
+        if player.Character:FindFirstChildWhichIsA('Seat') then
+            local seat = player.Character:FindFirstChildWhichIsA('Seat')
+            if game.Players.LocalPlayer.Character ~= nil then
+                if game.Players.LocalPlayer.Character:FindFirstChild('Humanoid') then
+                    if game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
+                        seat:Sit(game.Players.LocalPlayer.Character.Humanoid)
+                        repeat wait() until seat:FindFirstChild('SeatWeld')
+                        seat.SeatWeld:Destroy()
+                    end
+                end
+            end
+        end
+
+        wait()
+    end
+end
+
 function Teleportation:Player(username, displayName)
     if username ~= nil and displayName ~= nil then
         username = username:lower()
