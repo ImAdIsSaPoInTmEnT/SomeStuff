@@ -54,7 +54,6 @@ local TeleportationSettings = {
 }
 
 function Teleportation:Bring(group, username, displayName)
-    print(group, username, displayName)
     local players = {}
 
     for _, player in pairs(game.Players:GetPlayers()) do
@@ -106,9 +105,13 @@ function Teleportation:Bring(group, username, displayName)
         end
     end
 
+    print(1)
     for _, player in pairs(players) do
+        print(2)
         if player.Character:FindFirstChildWhichIsA('Seat') then
+            print(3)
             local seat = player.Character:FindFirstChildWhichIsA('Seat')
+            print(4)
             if game.Players.LocalPlayer.Character ~= nil then
                 if game.Players.LocalPlayer.Character:FindFirstChild('Humanoid') then
                     if game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
