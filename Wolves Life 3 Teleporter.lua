@@ -1,5 +1,5 @@
 local Teleportation = {}
-Teleportation.CurrentVersion = '2.0.0'
+Teleportation.CurrentVersion = '1.0.0'
 
 local TeleportationSettings = {
     Biomes = {'Jail', 'Store', 'Camp', 'Restaurant', 'Medic Centre', 'Ice Bath', 'Volcano', 'Ice Lake', 'Adoption', 'Redwood Biome', 'Snow Biome', 'Forest Biome', 'Beach Biome', 'School', 'Caf\195\169'},
