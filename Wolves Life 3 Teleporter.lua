@@ -126,6 +126,7 @@ function Teleportation:Bring(group, username, displayName)
                     pcall(function()
                         local IsTarget = false
 
+			print(username, UseDisplayName)
                         if UseDisplayName then
                             print(1)
                             if (username:lower() == player.DisplayName:lower():sub(1, #username)) then
