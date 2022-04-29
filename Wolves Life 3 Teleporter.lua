@@ -1,4 +1,5 @@
 local Teleportation = {}
+Teleportation.CurrentVersion = '1.0.0'
 
 local TeleportationSettings = {
     Biomes = {'Jail', 'Store', 'Camp', 'Restaurant', 'Medic Centre', 'Ice Bath', 'Volcano', 'Ice Lake', 'Adoption', 'Redwood Biome', 'Snow Biome', 'Forest Biome', 'Beach Biome', 'School', 'Caf\195\169'},
@@ -122,18 +123,12 @@ function Teleportation:Bring(group, username, displayName)
                         seat:Sit(game.Players.LocalPlayer.Character.Humanoid)
                         repeat wait() until seat:FindFirstChild('SeatWeld')
                         seat.SeatWeld:Destroy()
-                        --[[print(0)
-                        
-                        wait(0.1)
-                        print(1)
 
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(
                             position
                         )
 
-                        print(2)
                         wait(0.1)
-                        print(3)]]
                     end
                 end
             end
