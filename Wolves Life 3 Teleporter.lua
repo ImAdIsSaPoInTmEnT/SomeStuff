@@ -140,11 +140,6 @@ function Teleportation:Bring(group, username, displayName)
                             local seat = player.Character.Seat1 or player.Character.Seat2
                             seat:Sit(game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid'))
                             repeat wait() until seat:FindFirstChild('SeatWeld')
-                            seat.SeatWeld:Destroy()
-                            wait(0.1)
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(
-                                pos
-                            )
                         end
                     end)
                 end
