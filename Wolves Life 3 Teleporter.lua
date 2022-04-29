@@ -56,6 +56,7 @@ local TeleportationSettings = {
 function Teleportation:Bring(group, username, displayName)
     local players = {}
     local position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+    local CanTP = true
 
     for _, player in pairs(game:GetService('Players'):GetPlayers()) do
         if player == game.Players.LocalPlayer then continue end
@@ -74,6 +75,9 @@ function Teleportation:Bring(group, username, displayName)
     end
 
     for _, player in ipairs(players) do
+        repeat wait() until CanTP
+        CanTP = false
+
         local character = nil
         local seat = nil
 
@@ -124,6 +128,8 @@ function Teleportation:Bring(group, username, displayName)
                             )
 
                             wait(0.1)
+                            
+                            CanTP = true
                         end
                     end
                 end
