@@ -83,6 +83,12 @@ function Teleportation:Bring(group, username, displayName)
         spawn(function()
             wait(0.6)
             print('CanTP true')
+
+            repeat
+                wait()
+            until (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - position).Magnitude <= 10
+            print('Close enough for daddy..')
+
             wait()
             CanTP = true
         end)
