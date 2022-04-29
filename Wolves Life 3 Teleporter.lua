@@ -94,22 +94,17 @@ function Teleportation:Bring(group, username, displayName)
                     if player.GameData:FindFirstChild('Age') then
                         if player.GameData.Age.Value ~= 'Newborn' and player.GameData.Age.Value:len() > 1 then
                             if player.Character ~= nil and player.Character:FindFirstChildWhichIsA('Seat') then
-                                print(-5)
-                               if displayName then
-                                    print(-4)
-                                if (username == player.DisplayName:lower():sub(1, #username)) then
-                                        print(-3)
-                                    table.insert(players, player)
-                                    break
-                                   end
-                               else
-                                    print(-2)
-                                if (username == player.Name:lower():sub(1, #username)) then
-                                        print(-1)
-                                    table.insert(players, player)
-                                    break
-                                   end
-                               end
+                                if displayName then
+                                    if (username:lower() == player.DisplayName:lower():sub(1, #username)) then
+                                        table.insert(players, player)
+                                        break
+                                    end
+                                else
+                                    if (username:lower() == player.Name:lower():sub(1, #username)) then
+                                        table.insert(players, player)
+                                        break
+                                    end
+                                end
                             end
                         end
                     end
@@ -117,12 +112,11 @@ function Teleportation:Bring(group, username, displayName)
             end
         end
     end
-    print(unpack(players))
+
     for _, player in pairs(players) do
         if player.Character:FindFirstChildWhichIsA('Seat') then
             local seat = player.Character:FindFirstChildWhichIsA('Seat')
             if game.Players.LocalPlayer.Character ~= nil then
-                print(1)
                 if game.Players.LocalPlayer.Character:FindFirstChild('Humanoid') then
                     if game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
                         seat:Sit(game.Players.LocalPlayer.Character.Humanoid)
