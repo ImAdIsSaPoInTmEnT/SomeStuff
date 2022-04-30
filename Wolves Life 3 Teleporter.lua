@@ -74,14 +74,12 @@ function Teleportation:Bring(group, username, displayName)
                             game.ReplicatedStorage.CarryNewborn:FireServer(
                                 player
                             )
-                            wait(0.1)
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(
-                                pos
-                            )
-                            wait(0.1)
-                            game.ReplicatedStorage.MasterKey2:FireServer(
-                                'Kick Eggs'
-                            )
+                            wait(0.4)
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
+                            for i = 1, 6 do
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
+                                wait(0.2)
+                            end
                         end
 					end)
 				end
@@ -121,14 +119,12 @@ function Teleportation:Bring(group, username, displayName)
                             game.ReplicatedStorage.CarryNewborn:FireServer(
                                 player
                             )
-                            wait(0.1)
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(
-                                pos
-                            )
-                            wait(0.1)
-                            game.ReplicatedStorage.MasterKey2:FireServer(
-                                'Kick Eggs'
-                            )
+                            wait(0.4)
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
+                            for i = 1, 6 do
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
+                                wait(0.2)
+                            end
                         end
 					end)
 				end
