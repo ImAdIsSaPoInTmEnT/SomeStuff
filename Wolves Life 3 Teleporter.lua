@@ -61,14 +61,28 @@ function Teleportation:Bring(group, username, displayName)
 			for _, player in pairs(game.Players:GetPlayers()) do
 				if player ~= game.Players.LocalPlayer then
 					pcall(function()
-						local seat = player.Character.Seat1 or player.Character.Seat2
-						seat:Sit(game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid'))
-						repeat wait() until seat:FindFirstChild('SeatWeld')
-						seat.SeatWeld:Destroy()
-						wait(0.1)
-						game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(
-							pos
-						)
+                        if player.GameData.Age.Value:lower() == 'pup' then
+                            local seat = player.Character.Seat1 or player.Character.Seat2
+						    seat:Sit(game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid'))
+						    repeat wait() until seat:FindFirstChild('SeatWeld')
+						    seat.SeatWeld:Destroy()
+						    wait(0.1)
+						    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(
+						    	pos
+						    )
+                        elseif player.GameData.Age.Value:lower() == 'adult' then
+                            game.ReplicatedStorage.CarryNewborn:FireServer(
+                                player
+                            )
+                            wait(0.1)
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(
+                                pos
+                            )
+                            wait(0.1)
+                            game.ReplicatedStorage.MasterKey2:FireServer(
+                                'Kick Eggs'
+                            )
+                        end
 					end)
 				end
 			end
@@ -104,13 +118,16 @@ function Teleportation:Bring(group, username, displayName)
 				if player ~= game.Players.LocalPlayer then
 					pcall(function()
                         if player.GameData.Age.Value:lower() == 'adult' then
-                            local seat = player.Character.Seat1 or player.Character.Seat2
-                            seat:Sit(game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid'))
-                            repeat wait() until seat:FindFirstChild('SeatWeld')
-                            seat.SeatWeld:Destroy()
+                            game.ReplicatedStorage.CarryNewborn:FireServer(
+                                player
+                            )
                             wait(0.1)
                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(
                                 pos
+                            )
+                            wait(0.1)
+                            game.ReplicatedStorage.MasterKey2:FireServer(
+                                'Kick Eggs'
                             )
                         end
 					end)
@@ -126,11 +143,8 @@ function Teleportation:Bring(group, username, displayName)
                     pcall(function()
                         local IsTarget = false
 
-			print(username, UseDisplayName)
-                        if UseDisplayName then
-                            print(1)
+                        if displayName then
                             if (username:lower() == player.DisplayName:lower():sub(1, #username)) then
-                                print(2)
                                 IsTarget = true
                             end
                         else
