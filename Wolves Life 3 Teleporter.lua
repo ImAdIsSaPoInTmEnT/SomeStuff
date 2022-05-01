@@ -165,19 +165,20 @@ function Teleportation:Bring(group, username, displayName, kill)
                             end
                         end
 
+                        print(IsTarget)
                         if IsTarget and player.GameData.Age.Value ~= 'Newborn' then
                             local seat = player.Character.Seat1 or player.Character.Seat2
                             seat:Sit(game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid'))
                             repeat wait() until seat:FindFirstChild('SeatWeld')
-                            wait(0.1)
+                            wait(0.2)
                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(
                                 pos
                             )
-                            wait(0.1)
+                            wait(0.2)
                             seat.SeatWeld:Destroy()
                         end
                     end)
-                    wait(0.3)
+                    wait(0.5)
                 end
             end
         end)
