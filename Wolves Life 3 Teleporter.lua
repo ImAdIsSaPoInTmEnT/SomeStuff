@@ -53,11 +53,26 @@ local TeleportationSettings = {
     }
 }
 
-function Teleportation:Bring(group, username, displayName)
+function Teleportation:Bring(group, username, displayName, kill)
+    local pos
+    local platform
+    local originalPos = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+
+    if kill then
+        local p = game.Players.LocalPlayer.Character.HumanoidRootPart.Position + Vector3.new(0, 50000, 650000)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(p)
+        platform = Instance.new('Part')
+        platform.Parent = workspace
+        platform.Size = Vector3.new(300, 20, 300)
+        platform.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position + Vector3.new(0, -30, 0)
+        platform.Anchored = true
+        platform.Transparency = 1
+    else
+        pos = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+    end
+
 	if group:lower() == 'all' then
 		pcall(function()
-			local pos = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
-			
 			for _, player in pairs(game.Players:GetPlayers()) do
 				if player ~= game.Players.LocalPlayer then
 					pcall(function()
@@ -91,9 +106,7 @@ function Teleportation:Bring(group, username, displayName)
 
     elseif group:lower() == 'pups' then
         pcall(function()
-            local pos = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
-			
-			for _, player in pairs(game.Players:GetPlayers()) do
+            for _, player in pairs(game.Players:GetPlayers()) do
 				if player ~= game.Players.LocalPlayer then
 					pcall(function()
                         if player.GameData.Age.Value:lower() == 'pup' then
@@ -116,9 +129,7 @@ function Teleportation:Bring(group, username, displayName)
 
     elseif group:lower() == 'adults' then
         pcall(function()
-            local pos = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
-			
-			for _, player in pairs(game.Players:GetPlayers()) do
+            for _, player in pairs(game.Players:GetPlayers()) do
 				if player ~= game.Players.LocalPlayer then
 					pcall(function()
                         if player.GameData.Age.Value:lower() == 'adult' then
@@ -139,8 +150,6 @@ function Teleportation:Bring(group, username, displayName)
         end)
     elseif group:lower() == 'player' then
         pcall(function()
-            local pos = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
-
             for _, player in pairs(game.Players:GetPlayers()) do
                 if player ~= game.Players.LocalPlayer then
                     pcall(function()
@@ -173,6 +182,14 @@ function Teleportation:Bring(group, username, displayName)
             end
         end)
 	end
+
+    wait(10)
+    if platform then
+        platform:Destroy()
+        if originalPos ~= nil then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(originalPos)
+        end
+    end
 end
 
 function Teleportation:Player(username, displayName)
