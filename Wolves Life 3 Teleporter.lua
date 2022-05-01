@@ -84,6 +84,7 @@ function Teleportation:Bring(group, username, displayName)
                             end
                         end
 					end)
+                    wait(0.6)
 				end
 			end
 		end)
@@ -105,8 +106,10 @@ function Teleportation:Bring(group, username, displayName)
                             )
                             wait(0.1)
                             seat.SeatWeld:Destroy()
+                            wait(0.1)
                         end
 					end)
+                    wait(0.4)
 				end
 			end
         end)
@@ -130,6 +133,7 @@ function Teleportation:Bring(group, username, displayName)
                             seat.SeatWeld:Destroy()
                         end
 					end)
+                    wait(0.3)
 				end
 			end
         end)
@@ -164,6 +168,7 @@ function Teleportation:Bring(group, username, displayName)
                             seat.SeatWeld:Destroy()
                         end
                     end)
+                    wait(0.3)
                 end
             end
         end)
