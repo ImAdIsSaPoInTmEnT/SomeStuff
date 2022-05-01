@@ -117,7 +117,7 @@ function Teleportation:Bring(group, username, displayName, kill)
                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(
                                 pos
                             )
-                            wait(0.1)
+                            wait(0.2)
                             seat.SeatWeld:Destroy()
                             wait(0.1)
                         end
@@ -174,7 +174,9 @@ function Teleportation:Bring(group, username, displayName, kill)
                                 pos
                             )
                             wait(0.1)
-                            seat.SeatWeld:Destroy()
+                            if kill then
+                                seat.SeatWeld:Destroy()
+                            end
                         end
                     end)
                 end
@@ -182,7 +184,7 @@ function Teleportation:Bring(group, username, displayName, kill)
         end)
 	end
 
-    wait(10)
+    wait(3.5)
     if platform then
         platform:Destroy()
         if originalPos ~= nil then
