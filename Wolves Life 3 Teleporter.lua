@@ -149,10 +149,12 @@ function Teleportation:Bring(group, username, displayName, kill)
 			end
         end)
     elseif group:lower() == 'player' then
+        print(1)
         pcall(function()
             for _, player in pairs(game.Players:GetPlayers()) do
                 if player ~= game.Players.LocalPlayer then
                     pcall(function()
+                        print(2)
                         local IsTarget = false
 
                         if displayName then
@@ -167,6 +169,7 @@ function Teleportation:Bring(group, username, displayName, kill)
 
                         print(IsTarget)
                         if IsTarget and player.GameData.Age.Value ~= 'Newborn' then
+                            print(3)
                             local seat = player.Character.Seat1 or player.Character.Seat2
                             seat:Sit(game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid'))
                             repeat wait() until seat:FindFirstChild('SeatWeld')
