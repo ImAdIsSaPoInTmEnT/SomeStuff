@@ -181,7 +181,7 @@ function Teleportation:Bring(group, username, displayName, kill)
                             seat.SeatWeld:Destroy()
                         end
                     end)
-                    wait(0.5)
+                    wait()
                 end
             end
         end)
