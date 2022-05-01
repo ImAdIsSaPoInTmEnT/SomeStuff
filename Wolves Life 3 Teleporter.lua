@@ -113,8 +113,11 @@ function Teleportation:Bring(group, username, displayName, kill)
                         if player.GameData.Age.Value:lower() == 'pup' then
                             print(0)
                             local seat = player.Character.Seat1 or player.Character.Seat2
+                            print(0.1)
                             seat:Sit(game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid'))
+                            print(0.3)
                             repeat wait() until seat:FindFirstChild('SeatWeld')
+                            print(0.4)
                             wait(0.1)
                             print(1)
                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(
