@@ -61,24 +61,26 @@ function Teleportation:Bring(group, username, displayName)
 			for _, player in pairs(game.Players:GetPlayers()) do
 				if player ~= game.Players.LocalPlayer then
 					pcall(function()
-                        if player.GameData.Age.Value:lower() == 'pup' then
-                            local seat = player.Character.Seat1 or player.Character.Seat2
-						    seat:Sit(game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid'))
-						    repeat wait() until seat:FindFirstChild('SeatWeld')
-						    seat.SeatWeld:Destroy()
-						    wait(0.1)
-						    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(
-						    	pos
-						    )
-                        elseif player.GameData.Age.Value:lower() == 'adult' then
-                            game.ReplicatedStorage.CarryNewborn:FireServer(
-                                player
-                            )
-                            wait(0.4)
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
-                            for i = 1, 6 do
-                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
-                                wait(0.2)
+                        if player.GameData.Age.Value:lower() ~= 'newborn' then
+                            if username ~= nil then
+                                local s,e = pcall(function() username = tostring(username) end)
+                                if not e then
+                                    if username:len() > 1 and table.find(TeleportationSettings.Biomes, username) then
+                                        local seat = player.Character.Seat1 or player.Character.Seat2
+                                        seat:Sit(game:GetService('Players').LocalPlayer.Character:FindFirstChildOfClass('Humanoid'))
+                                        repeat wait() until seat:FindFirstChild('SeatWeld')
+                                        wait(0.2)
+                                        game.ReplicatedStorage.MasterKey:FireServer(
+                                            'Spawn',
+                                            username
+                                        )
+                                        wait(0.2)
+                                        if seat:FindFirstChild('SeatWeld') then
+                                            seat.SeatWeld:Destroy()
+                                        end
+                                        wait(0.1)
+                                    end
+                                end
                             end
                         end
 					end)
@@ -97,11 +99,12 @@ function Teleportation:Bring(group, username, displayName)
                             local seat = player.Character.Seat1 or player.Character.Seat2
                             seat:Sit(game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid'))
                             repeat wait() until seat:FindFirstChild('SeatWeld')
-                            seat.SeatWeld:Destroy()
                             wait(0.1)
                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(
                                 pos
                             )
+                            wait(0.1)
+                            seat.SeatWeld:Destroy()
                         end
 					end)
 				end
@@ -116,15 +119,15 @@ function Teleportation:Bring(group, username, displayName)
 				if player ~= game.Players.LocalPlayer then
 					pcall(function()
                         if player.GameData.Age.Value:lower() == 'adult' then
-                            game.ReplicatedStorage.CarryNewborn:FireServer(
-                                player
+                            local seat = player.Character.Seat1 or player.Character.Seat2
+                            seat:Sit(game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid'))
+                            repeat wait() until seat:FindFirstChild('SeatWeld')
+                            wait(0.1)
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(
+                                pos
                             )
-                            wait(0.4)
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
-                            for i = 1, 6 do
-                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
-                                wait(0.2)
-                            end
+                            wait(0.1)
+                            seat.SeatWeld:Destroy()
                         end
 					end)
 				end
@@ -153,7 +156,12 @@ function Teleportation:Bring(group, username, displayName)
                             local seat = player.Character.Seat1 or player.Character.Seat2
                             seat:Sit(game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid'))
                             repeat wait() until seat:FindFirstChild('SeatWeld')
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
+                            wait(0.1)
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(
+                                pos
+                            )
+                            wait(0.1)
+                            seat.SeatWeld:Destroy()
                         end
                     end)
                 end
